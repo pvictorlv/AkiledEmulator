@@ -116,7 +116,10 @@ namespace Akiled.HabboHotel.Rooms.Games
                 foreach (var ball in _balls.Values)
                 {
 
-                    if (!ball.BallIsMoving || ball?.ballMover == null) return false;
+                    if (!ball.BallIsMoving || ball?.ballMover == null)
+                    {
+                        return false;
+                    }
 
                     new Task(async () =>
                     {

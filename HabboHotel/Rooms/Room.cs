@@ -232,7 +232,7 @@ namespace Akiled.HabboHotel.Rooms
                 {
                     while ((GotSoccer() && !Disposed) && !_mainProcessSource.IsCancellationRequested)
                     {
-                        var start = AkiledEnvironment.GetUnixTimestamp();
+                       // var start = AkiledEnvironment.GetUnixTimestamp();
                         try
                         {
                             if (!GetSoccer().OnCycle())
@@ -247,8 +247,8 @@ namespace Akiled.HabboHotel.Rooms
                             Logging.LogCriticalException(e.ToString());
                         }
 
-                        var end = AkiledEnvironment.GetUnixTimestamp() - start;
-                        await Task.Delay(100);
+                     //   var end = AkiledEnvironment.GetUnixTimestamp() - start;
+                     //   await Task.Delay(100);
                     }
                 }, TaskCreationOptions.LongRunning).Start();
             }
