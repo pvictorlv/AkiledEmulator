@@ -311,7 +311,6 @@ namespace Akiled.HabboHotel
             using (IQueryAdapter dbClient = AkiledEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.RunQuery("UPDATE users SET online = '0' WHERE online = '1'");
-                dbClient.RunQuery("UPDATE users SET auth_ticket = '' WHERE auth_ticket != ''");
                 dbClient.RunQuery("UPDATE user_websocket SET auth_ticket = '' WHERE auth_ticket != ''");
                 dbClient.RunQuery("UPDATE rooms SET users_now = '0' WHERE users_now > '0'");
                 dbClient.RunQuery("UPDATE server_status SET status = '1', users_online = '0', rooms_loaded = '0', stamp = '" + AkiledEnvironment.GetUnixTimestamp() + "'");

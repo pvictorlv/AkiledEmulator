@@ -344,7 +344,8 @@ namespace Akiled.HabboHotel.Users.UserData
             int Mazo = Convert.ToInt32(dRow["mazo"]);
             string clientVolume = (string)dRow["volume"];
             bool NuxEnable = AkiledEnvironment.EnumToBool(dRow["nux_enable"].ToString());
-            string MachineId = (string)dRow["machine_id"];
+            string MachineId = Convert.ToString(dRow["machine_id"]);
+           
             Language Langue = LanguageManager.ParseLanguage((string)dRow["langue"]);
             bool IgnoreAll = AkiledEnvironment.EnumToBool(dRow["ignoreall"].ToString());
             int last_marked_friend = Convert.ToInt32(dRow["last_marked_friend"]);

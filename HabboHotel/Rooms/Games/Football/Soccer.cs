@@ -106,7 +106,7 @@ namespace Akiled.HabboHotel.Rooms.Games
                 }
             }
         }
-        internal bool OnCycle()
+        internal async Task<bool> OnCycle()
         {
             try
             {
@@ -116,28 +116,27 @@ namespace Akiled.HabboHotel.Rooms.Games
                 foreach (var ball in _balls.Values)
                 {
 
-                    if (!ball.BallIsMoving || ball?.ballMover == null)
+                    if (ball == null || !ball.BallIsMoving || ball?.ballMover == null)
                     {
-                        return false;
+                        await Task.Delay(250).ConfigureAwait(false);
+                        return true;
                     }
 
-                    new Task(async () =>
+                    MoveBallProcess(ball, ball.ballMover);
+
+                    if (ball.ExtraData == "33")
                     {
-                        MoveBallProcess(ball, ball.ballMover);
-                        
-                        if (ball.ExtraData == "33")
-                        {
-                            await Task.Delay(100);
-                            
-                        } else if (ball.ExtraData == "22")
-                        {
-                            await Task.Delay(150);
-                        }
-                        else if (ball.ExtraData == "11")
-                        {
-                            await Task.Delay(400);
-                        }
-                    }).Start();
+                        await Task.Delay(100);
+
+                    }
+                    else if (ball.ExtraData == "22")
+                    {
+                        await Task.Delay(150);
+                    }
+                    else
+                    {
+                        await Task.Delay(350);
+                    }
                 }
                 
             }

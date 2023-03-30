@@ -42,12 +42,12 @@ namespace Akiled.Core.FigureData
             {
                 foreach (XmlNode Child in Node.ChildNodes)
                 {
-                    this._palettes.Add(Convert.ToInt32(Child.Attributes["id"].Value),
+                    this._palettes.TryAdd(Convert.ToInt32(Child.Attributes["id"].Value),
                         new Palette(Convert.ToInt32(Child.Attributes["id"].Value)));
 
                     foreach (XmlNode Sub in Child.ChildNodes)
                     {
-                        this._palettes[Convert.ToInt32(Child.Attributes["id"].Value)].Colors.Add(
+                        this._palettes[Convert.ToInt32(Child.Attributes["id"].Value)].Colors.TryAdd(
                             Convert.ToInt32(Sub.Attributes["id"].Value),
                             new Color(Convert.ToInt32(Sub.Attributes["id"].Value),
                                 Convert.ToInt32(Sub.Attributes["index"].Value),
@@ -63,7 +63,7 @@ namespace Akiled.Core.FigureData
             {
                 foreach (XmlNode Child in Node.ChildNodes)
                 {
-                    this._setTypes.Add(Child.Attributes["type"].Value,
+                    this._setTypes.TryAdd(Child.Attributes["type"].Value,
                         new FigureSet(SetTypeUtility.GetSetType(Child.Attributes["type"].Value),
                             Convert.ToInt32(Child.Attributes["paletteid"].Value)));
 
@@ -71,7 +71,7 @@ namespace Akiled.Core.FigureData
                     {
                         try
                         {
-                            this._setTypes[Child.Attributes["type"].Value].Sets.Add(
+                            this._setTypes[Child.Attributes["type"].Value].Sets.TryAdd(
                                 Convert.ToInt32(Sub.Attributes["id"].Value),
                                 new Set(Convert.ToInt32(Sub.Attributes["id"].Value),
                                     Convert.ToString(Sub.Attributes["gender"].Value),
@@ -91,7 +91,7 @@ namespace Akiled.Core.FigureData
                                 try
                                 {
                                     this._setTypes[Child.Attributes["type"].Value]
-                                        .Sets[Convert.ToInt32(Sub.Attributes["id"].Value)].Parts.Add(
+                                        .Sets[Convert.ToInt32(Sub.Attributes["id"].Value)].Parts.TryAdd(
                                             Convert.ToInt32(Subb.Attributes["id"].Value) + "-" +
                                             Subb.Attributes["type"].Value,
                                             new Part(Convert.ToInt32(Subb.Attributes["id"].Value),
@@ -112,7 +112,7 @@ namespace Akiled.Core.FigureData
             }
 
             //Faceless.
-            this._setTypes["hd"].Sets.Add(99999, new Set(99999, "U", 0, true));
+            this._setTypes["hd"].Sets.TryAdd(99999, new Set(99999, "U", 0, true));
 
 
         }
